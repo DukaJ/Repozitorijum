@@ -21,18 +21,20 @@ namespace ProjekatFinalni.Controllers
             using (BazaProjekatEntities3 db = new BazaProjekatEntities3())
             {
                 var korisnikPodaci = db.Korisniks.Where(x => x.Korisnickoime == korisnikModel.Korisnickoime && x.Lozinka == korisnikModel.Lozinka).FirstOrDefault();
-                if (korisnikPodaci == null)
+                if(korisnikPodaci==null)
                 {
-                    korisnikModel.LoginErrorPoruka = "Pogresno korisnicko ime ili lozinka,molimo pokusajte ponovo.";
+                    korisnikModel.LoginErrorPoruka = "Pogresno korisnicko ime ili lozinka,molim pokusajte ponovo.";
                     return View("Index", korisnikModel);
                 }
                 else
                 {
-                    Session["KorisnikID"] = korisnikPodaci.KorisnikID;
-                    return RedirectToAction("Index", "Pocetna");
+                    Session["korisnikID"] = korisnikPodaci.KorisnikID;
+                   
+                        return RedirectToAction("Index", "Pocetna");
+                    
                 }
             }
-           
+               
         }
     }
 }
